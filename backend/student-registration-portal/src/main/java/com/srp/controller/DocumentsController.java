@@ -1,8 +1,9 @@
 package com.srp.controller;
-// zip downloader
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.srp.entity.Documents;
+//import com.srp.repository.DocumentsRepository;
 import com.srp.service.DocumentsService;
 
 @RestController
@@ -27,6 +29,8 @@ public class DocumentsController {
     
     @Autowired
     private DocumentsService documentsService;
+//    @Autowired
+//	private DocumentsRepository documentsRepository;
     
     @GetMapping("/student/{studentId}")
     public ResponseEntity<ByteArrayResource> getDocumentsByStudentId(@PathVariable Long studentId) {
@@ -64,55 +68,17 @@ public class DocumentsController {
             return ResponseEntity.notFound().build();
         }
     }
-}
-
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import com.srp.entity.Documents;
-//import com.srp.service.DocumentsService;
-//
-//@RestController
-//@RequestMapping("/api/documents")
-//@CrossOrigin("http://localhost:3000")
-//public class DocumentsController {
-//    
-//    @Autowired
-//    private DocumentsService documentsService;
-//    
-//    @GetMapping("/student/{studentId}")
-//    public ResponseEntity<List<ResponseEntity<byte[]>>> getDocumentsByStudentId(@PathVariable Long studentId) {
-//        List<Documents> documents = documentsService.getByStudentId(studentId);
-//        
-//        if (!documents.isEmpty()) {
-//            // Assuming each document has a unique file name
-//            List<ResponseEntity<byte[]>> responses = new ArrayList<>();
-//            for (Documents document : documents) {
-//                HttpHeaders headers = new HttpHeaders();
-//                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getFileName() + "\"");
-//                
-//                ResponseEntity<byte[]> response = ResponseEntity.ok()
-//                        .headers(headers)
-//                        .contentLength(document.getDocument().length)
-//                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-//                        .body(document.getDocument());
-//                
-//                responses.add(response);
-//            }
-//            
-//            return ResponseEntity.ok().body(responses);
+    
+//    @GetMapping("/std/{id}")
+//    public ResponseEntity<byte[]> getPdf(@PathVariable Long id) {
+//        Optional<Documents> optionalPdfDocument = documentsRepository.findById(id);
+//        if (optionalPdfDocument.isPresent()) {
+//            Documents pdfDocument = optionalPdfDocument.get();
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + pdfDocument.getFileName() + "\"")
+//                    .body(pdfDocument.getDocument());
 //        } else {
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
-//}
+}

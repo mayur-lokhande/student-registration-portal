@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +31,8 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
+//	@NotEmpty(message = "User Email shuld not be null or empty") //validation
+//	@Email(message = "Email address should be valid") //validation
 	private String emailId;
 	@Column(nullable = false)
 	private Long mobileNumber;

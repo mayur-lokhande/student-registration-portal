@@ -19,5 +19,4 @@ public class DocumentsServiceImpl implements DocumentsService{
 	public List<Documents> getByStudentId(Long studentId) {
 		return documentsRepository.findByStudentId(studentId);
 	}
-
 }

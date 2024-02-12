@@ -124,7 +124,7 @@ export default function EditStudent() {
                   value={status}
                   onChange={onInputChange}
                 >
-                  <option value={"In Progress"}>Select Status</option>
+                  <option value={"Pending"}>Select Status</option>
                   <option value={"Selected"}>Selected</option>
                   <option value={"Rejected"}>Rejected</option>
                 </select>

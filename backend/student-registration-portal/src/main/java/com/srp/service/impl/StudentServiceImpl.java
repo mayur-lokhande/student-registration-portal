@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.srp.entity.Documents;
 import com.srp.entity.Student;
+import com.srp.exception.ResourceNotFoundException;
 import com.srp.repository.DocumentsRepository;
 import com.srp.repository.StudentRepository;
 import com.srp.service.StudentService;
@@ -37,6 +38,7 @@ public class StudentServiceImpl implements StudentService{
 			List<MultipartFile> files) throws IOException {
 		Student student=new Student();
 		student.setName(name);
+		List<Student> studentMail=studentRepository.findByEmailId(emailId);
 		student.setEmailId(emailId);
 		student.setMobileNumber(mobileNumber);
 		student.setAddress(address);
@@ -60,14 +62,20 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public Optional<Student> getStudentById(Long id) {
+	public Student getStudentById(Long id) {
 		Optional<Student> student=studentRepository.findById(id);
-		return student;
+		if(student.isPresent()) {
+		return student.get();
+		}
+		else {
+			throw new ResourceNotFoundException("Student", "ID", id);
+		}
+		
 	}
 
 	@Override
 	public Student updateStudent(Student student) {
-		Student existingStudent = studentRepository.findById(student.getId()).get();
+		Student existingStudent = studentRepository.findById(student.getId()).orElseThrow(()->new ResourceNotFoundException("Student", "ID", student.getId()));
 		
 //		existingStudent.setName(student.getName());
 //		existingStudent.setEmailId(student.getEmailId());
@@ -83,6 +91,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public void delete(Long id) {
+		Student student=studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Student", "ID", id));
 		studentRepository.deleteById(id);
 		
 	}

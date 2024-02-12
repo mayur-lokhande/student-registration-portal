@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.srp.entity.Documents;
 import com.srp.entity.Student;
+import com.srp.exception.ResourceNotFoundException;
 import com.srp.repository.DocumentsRepository;
 import com.srp.service.StudentService;
 
@@ -55,8 +56,14 @@ public class StudentController {
 
 	@GetMapping("{id}")
 	public ResponseEntity<Student> getSingleStudent(@PathVariable Long id) {
-		Optional<Student> student = studentService.getStudentById(id);
-		return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		try {
+			return new ResponseEntity<Student>(studentService.getStudentById(id),HttpStatus.OK);
+		}
+		catch(ResourceNotFoundException e){
+			throw new ResourceNotFoundException("Student", "ID", id);
+		}
+//		Student student = studentService.getStudentById(id);
+//		return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 
 	}
 
@@ -100,33 +107,17 @@ public class StudentController {
 	}
 	
 	//Document entity controller
-	@GetMapping("/document/{id}")
-    public ResponseEntity<byte[]> getPdf(@PathVariable Long id) {
-        Optional<Documents> optionalPdfDocument = documentsRepository.findById(id);
-        if (optionalPdfDocument.isPresent()) {
-            Documents pdfDocument = optionalPdfDocument.get();
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + pdfDocument.getFileName() + "\"")
-                    .body(pdfDocument.getDocument());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-//	@GetMapping("/documents/{id}")
-//	public ResponseEntity<byte[]> getPdfs(@PathVariable Long id) {
-//	    List<byte[]> documents = new ArrayList<>();
-//	    List<Documents> documentsList = documentsRepository.getByStudentId(id);
-//	    
-//	    if (!documentsList.isEmpty()) {
-//	        for (Documents document : documentsList) {
-//	            documents.add(document.getDocument());
-//	        }
-//	        return ResponseEntity.ok()
-//	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getFileName() + "\"")
-//	                .body(documents);
-//	    } else {
-//	        return ResponseEntity.notFound().build();
-//	    }
-//	}
+//	@GetMapping("/document/{id}")
+//    public ResponseEntity<byte[]> getPdf(@PathVariable Long id) {
+//        Optional<Documents> optionalPdfDocument = documentsRepository.findById(id);
+//        if (optionalPdfDocument.isPresent()) {
+//            Documents pdfDocument = optionalPdfDocument.get();
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + pdfDocument.getFileName() + "\"")
+//                    .body(pdfDocument.getDocument());
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }
