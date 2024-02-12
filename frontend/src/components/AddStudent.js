@@ -1,9 +1,187 @@
+// import axios from "axios";
+// import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// // import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// // import { Toast } from "react-toastify/dist/components";
+
+// export default function AddStudent() {
+//   let navigate = useNavigate();
+
+//   const [student, setStudent] = useState({
+//     name: "",
+//     emailId: "",
+//     mobileNumber: "",
+//     address: "",
+//     marks: "",
+//     status: "Pending",
+//     comment: "NA",
+//     document: "",
+//   });
+
+//   // const [generatedId, setGeneratedId] = useState(null);
+
+//   const {
+//     name,
+//     emailId,
+//     mobileNumber,
+//     address,
+//     marks,
+//     // status,
+//     // comment,
+//     document,
+//   } = student;
+
+//   const onInputChange = (event) => {
+//     setStudent({ ...student, [event.target.name]: event.target.value });
+//   };
+
+//   // const onSubmit = async (event) => {
+//   //   event.preventDefault();
+//   //   await axios.post("http://localhost:8181/api/students", student);
+//   //   navigate("/");
+//   // };
+
+//   const onSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await axios.post(
+//         "http://localhost:8181/api/students",
+//         student
+//       );
+//       // setGeneratedId(response.data.id); // Assuming the backend returns the generated ID
+//       // console.log(response);
+//       alert(
+//         `Hi, ${response.data.name}. Your Registration ID: ${response.data.id}`
+//       );
+
+//       // toast.success(`Generated Id:${response.data.id}`, {
+//       //   position: "top-right",
+//       //   autoClose: 5000,
+//       //   hideProgressBar: false,
+//       //   closeOnClick: true,
+//       //   pauseOnHover: true,
+//       //   draggable: true,
+//       //   progress: undefined,
+//       // });
+//       navigate("/");
+//     } catch (error) {
+//       console.error("Error:", error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <div className="container pt-4 pb-4">
+//         <div className="row">
+//           <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+//             <h2 className="text-center text-white">
+//               Student Registration Form
+//             </h2>
+//             <form onSubmit={onSubmit}>
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   Student Name
+//                 </label>
+//                 <input
+//                   type={"text"}
+//                   className="form-control"
+//                   placeholder="Enter your name"
+//                   name="name"
+//                   value={name}
+//                   onChange={onInputChange}
+//                   required
+//                 />
+//               </div>
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   EmailId
+//                 </label>
+//                 <input
+//                   type={"email"}
+//                   className="form-control"
+//                   placeholder="Enter your emailId"
+//                   name="emailId"
+//                   value={emailId}
+//                   onChange={onInputChange}
+//                   required
+//                 />
+//               </div>
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   Mobile Number
+//                 </label>
+//                 <input
+//                   type={"number"}
+//                   className="form-control"
+//                   placeholder="Enter your Mobile Number"
+//                   name="mobileNumber"
+//                   value={mobileNumber}
+//                   onChange={onInputChange}
+//                   required
+//                 />
+//               </div>
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   Address
+//                 </label>
+//                 <input
+//                   type={"text"}
+//                   className="form-control"
+//                   placeholder="Enter your address"
+//                   name="address"
+//                   value={address}
+//                   onChange={onInputChange}
+//                   required
+//                 />
+//               </div>
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   Total Marks
+//                 </label>
+//                 <input
+//                   type={"number"}
+//                   className="form-control"
+//                   placeholder="Enter your Marks in percentage"
+//                   name="marks"
+//                   value={marks}
+//                   onChange={onInputChange}
+//                   required
+//                 />
+//               </div>
+
+//               <div className="mb-3">
+//                 <label htmlFor="Name" className="form-label text-white">
+//                   Upload Marksheet
+//                 </label>
+//                 <input
+//                   type={"file"}
+//                   className="form-control"
+//                   placeholder="Upload Marksheet"
+//                   name="document"
+//                   value={document}
+//                   onChange={onInputChange}
+//                 />
+//               </div>
+
+//               <button type="submit" className="btn btn-outline-success">
+//                 Submit
+//               </button>
+//               <Link className="btn btn-outline-danger mx-2" to="/">
+//                 Cancel
+//               </Link>
+//             </form>
+//             {/* <ToastContainer /> */}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// import { Toast } from "react-toastify/dist/components";
 
 export default function AddStudent() {
   let navigate = useNavigate();
@@ -18,43 +196,51 @@ export default function AddStudent() {
     comment: "NA",
   });
 
-  // const [generatedId, setGeneratedId] = useState(null);
+  // Add state to hold the selected file
+  const [file, setFile] = useState(null);
 
   const { name, emailId, mobileNumber, address, marks, status, comment } =
     student;
 
   const onInputChange = (event) => {
-    setStudent({ ...student, [event.target.name]: event.target.value });
+    if (event.target.name === "file") {
+      // Update file state
+      setFile(event.target.files);
+    } else {
+      // Update other input fields
+      setStudent({ ...student, [event.target.name]: event.target.value });
+    }
   };
-
-  // const onSubmit = async (event) => {
-  //   event.preventDefault();
-  //   await axios.post("http://localhost:8181/api/students", student);
-  //   navigate("/");
-  // };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      const formData = new FormData();
+      for (let i = 0; i < file.length; i++) {
+        formData.append(`files`, file[i]);
+      }
+      formData.append("name", name);
+      formData.append("emailId", emailId);
+      formData.append("mobileNumber", mobileNumber);
+      formData.append("address", address);
+      formData.append("marks", marks);
+      formData.append("status", status);
+      formData.append("comment", comment);
+
       const response = await axios.post(
         "http://localhost:8181/api/students",
-        student
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      // setGeneratedId(response.data.id); // Assuming the backend returns the generated ID
-      // console.log(response);
+
       alert(
         `Your Registration Id: ${response.data.id} Please Remember this id for further updates.`
       );
-
-      // toast.success(`Generated Id:${response.data.id}`, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
       navigate("/");
     } catch (error) {
       console.error("Error:", error);
@@ -71,11 +257,11 @@ export default function AddStudent() {
             </h2>
             <form onSubmit={onSubmit}>
               <div className="mb-3">
-                <label htmlFor="Name" className="form-label text-white">
+                <label htmlFor="name" className="form-label text-white">
                   Student Name
                 </label>
                 <input
-                  type={"text"}
+                  type="text"
                   className="form-control"
                   placeholder="Enter your name"
                   name="name"
@@ -84,37 +270,37 @@ export default function AddStudent() {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="Name" className="form-label text-white">
-                  EmailId
+                <label htmlFor="emailId" className="form-label text-white">
+                  Email Id
                 </label>
                 <input
-                  type={"text"}
+                  type="text"
                   className="form-control"
-                  placeholder="Enter your emailId"
+                  placeholder="Enter your email id"
                   name="emailId"
                   value={emailId}
                   onChange={onInputChange}
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="Name" className="form-label text-white">
+                <label htmlFor="mobileNumber" className="form-label text-white">
                   Mobile Number
                 </label>
                 <input
-                  type={"number"}
+                  type="text"
                   className="form-control"
-                  placeholder="Enter your Mobile Number"
+                  placeholder="Enter your mobile number"
                   name="mobileNumber"
                   value={mobileNumber}
                   onChange={onInputChange}
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="Name" className="form-label text-white">
+                <label htmlFor="address" className="form-label text-white">
                   Address
                 </label>
                 <input
-                  type={"text"}
+                  type="text"
                   className="form-control"
                   placeholder="Enter your address"
                   name="address"
@@ -123,19 +309,33 @@ export default function AddStudent() {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="Name" className="form-label text-white">
+                <label htmlFor="marks" className="form-label text-white">
                   Total Marks
                 </label>
                 <input
-                  type={"number"}
+                  type="text"
                   className="form-control"
-                  placeholder="Enter your Marks in percentage"
+                  placeholder="Enter your marks"
                   name="marks"
                   value={marks}
                   onChange={onInputChange}
                 />
               </div>
 
+              {/* Add file input field */}
+              <div className="mb-3">
+                <label htmlFor="file" className="form-label text-white">
+                  Upload File
+                </label>
+                <input
+                  type="file"
+                  className="form-control"
+                  name="file"
+                  multiple
+                  onChange={onInputChange}
+                />
+              </div>
+              {/* End of file input field */}
               <button type="submit" className="btn btn-outline-success">
                 Submit
               </button>
@@ -143,7 +343,6 @@ export default function AddStudent() {
                 Cancel
               </Link>
             </form>
-            {/* <ToastContainer /> */}
           </div>
         </div>
       </div>

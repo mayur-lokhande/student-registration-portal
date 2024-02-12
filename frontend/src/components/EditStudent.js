@@ -13,11 +13,12 @@ export default function EditStudent() {
     // mobileNumber: "",
     // address: "",
     // marks: "",
-    status:"",
-    comment:"",
+    status: "",
+    comment: "",
   });
 
-  const { /*name, emailId, mobileNumber, address, marks,*/ status,comment } = student;
+  const { /*name, emailId, mobileNumber, address, marks,*/ status, comment } =
+    student;
 
   const onInputChange = (event) => {
     setStudent({ ...student, [event.target.name]: event.target.value });
@@ -40,12 +41,14 @@ export default function EditStudent() {
 
   return (
     <div>
-        <div className="container pt-4 pb-4">
-          <div className="row">
-            <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-              <h2 className="text-center text-white">Respond to student application</h2>
-              <form onSubmit={onSubmit}>
-                {/* <div className="mb-3">
+      <div className="container pt-4 pb-4">
+        <div className="row">
+          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+            <h2 className="text-center text-white">
+              Respond to student application
+            </h2>
+            <form onSubmit={onSubmit}>
+              {/* <div className="mb-3">
                   <label htmlFor="Name" className="form-label text-white">
                     Name
                   </label>
@@ -111,44 +114,47 @@ export default function EditStudent() {
                   />
                 </div> */}
 
-                <div className="mb-3">
-                  <label htmlFor="Name" className="form-label text-white">
-                    Update Status
-                  </label>
-                  <select
-                    className="form-control"
-                    name="status"
-                    value={status}
-                    onChange={onInputChange}>
-
-                    <option value={"Select Status"} disabled selected>Select Status</option>
-                    <option value={"Selected"}>Selected</option>
-                    <option value={"Rejected"}>Rejected</option>
-                  </select>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="Name" className="form-label text-white">
-                    Comment
-                  </label>
-                  <input
-                    type={"text"}
-                    className="form-control"
-                    placeholder="Add comment"
-                    name="comment"
-                    value={comment}
-                    onChange={onInputChange}
-                  />
-                </div>
-                <button type="submit" className="btn btn-outline-primary">
-                  Submit
-                </button>
-                <Link className="btn btn-outline-danger mx-2" to="/admin/dashboard">
-                  Cancel
-                </Link>
-              </form>
-            </div>
+              <div className="mb-3">
+                <label htmlFor="Name" className="form-label text-white">
+                  Update Status
+                </label>
+                <select
+                  className="form-control"
+                  name="status"
+                  value={status}
+                  onChange={onInputChange}
+                >
+                  <option value={"In Progress"}>Select Status</option>
+                  <option value={"Selected"}>Selected</option>
+                  <option value={"Rejected"}>Rejected</option>
+                </select>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="Name" className="form-label text-white">
+                  Comment
+                </label>
+                <input
+                  type={"text"}
+                  className="form-control"
+                  placeholder="Add comment"
+                  name="comment"
+                  value={comment}
+                  onChange={onInputChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-outline-primary">
+                Submit
+              </button>
+              <Link
+                className="btn btn-outline-danger mx-2"
+                to="/admin/dashboard"
+              >
+                Cancel
+              </Link>
+            </form>
           </div>
         </div>
+      </div>
     </div>
   );
 }

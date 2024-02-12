@@ -2,31 +2,33 @@ import { useState } from "react";
 import { Col, Form, FormGroup } from "react-bootstrap";
 import { Button, Container, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
- 
+
 const AdminLogin = (props) => {
   const navigate = useNavigate();
- 
+
   const [adminLogin, setAdminLogin] = useState({});
- 
+
   const loginhandle = () => {
     // const uname = "admin";
     // const pass = "admin";
- 
+
     console.log(adminLogin.userName);
     console.log(adminLogin.password);
- 
-    if (adminLogin.userName === "admin" && adminLogin.password ==="admin") {
+
+    if (adminLogin.userName === "admin" && adminLogin.password === "admin") {
       // console.log("hello");
       navigate("dashboard");
-    }
-    else{
+    } else {
       alert("Please Enter currect Username or Password");
     }
   };
- 
+
   return (
-    <div className="card mx-auto mt-3 p-5 border bg-light" style={{width:"50%"}}>
-      <Form >
+    <div
+      className="card mx-auto mt-3 p-5 border bg-light"
+      style={{ width: "50%" }}
+    >
+      <Form>
         <h2>Admin Login</h2>
         <FormGroup>
           <Label>Username</Label>
@@ -42,7 +44,7 @@ const AdminLogin = (props) => {
             />
           </Col>
         </FormGroup>
-        <FormGroup >
+        <FormGroup>
           <Label>Password</Label>
           <Col>
             <Input
@@ -62,7 +64,7 @@ const AdminLogin = (props) => {
             className="mx-4"
             color="success"
             onClick={() => {
-              loginhandle();            
+              loginhandle();
               // props.setShow(true);
             }}
           >

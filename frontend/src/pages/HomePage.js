@@ -6,14 +6,14 @@ const HomePage = () => {
   return (
     <div>
       <div
-        class="card text-bg-dark mb-3 mx-auto my-5"
+        className="card text-bg-dark mb-3 mx-auto my-5"
         style={{ maxWidth: "45rem" }}
       >
-        <div class="card-body">
-          <h5 class="card-title fw-bold">
+        <div className="card-body">
+          <h5 className="card-title fw-bold">
             Welcome to the Student Registration Portal
           </h5>
-          <p class="card-text">Please Login to portal</p>
+          <p className="card-text">Please Login to portal</p>
           <Link className="btn btn-outline-primary mx-2 fw-bold" to="/admin">
             Admin Login
           </Link>
@@ -21,7 +21,7 @@ const HomePage = () => {
             User Login
           </Link>
           <hr />
-          <p class="card-text">Student Registration Form</p>
+          <p className="card-text">Student Registration Form</p>
           <Link
             className="btn btn-outline-primary mx-2 fw-bold"
             to="/addstudent"

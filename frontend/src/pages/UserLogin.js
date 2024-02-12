@@ -2,33 +2,34 @@ import { useState } from "react";
 import { Col, Form, FormGroup } from "react-bootstrap";
 import { Button, Container, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
- 
+
 const UserLogin = (props) => {
   const navigate = useNavigate();
- 
+
   const [userLogin, setUserLogin] = useState({});
- 
+
   const loginhandle = () => {
- 
-    const id=0;
+    const id = 0;
     console.log(userLogin.userName);
     console.log(userLogin.password);
- 
-    if (userLogin.userName === "student" && userLogin.password ==="student") {
+
+    if (userLogin.userName === "student" && userLogin.password === "student") {
       // console.log("hello");
-      let studentId=userLogin.id;
-      let newStudent="viewstatus/"+`${studentId}`;
+      let studentId = userLogin.id;
+      let newStudent = "viewstatus/" + `${studentId}`;
       navigate(newStudent);
-    }
-    else{
+    } else {
       alert("Please Enter currect Username or Password");
     }
   };
- 
+
   return (
-    <div className="card mx-auto mt-3 p-5 border bg-light" style={{width:"50%"}}>
-      <Form >
-        <h2>User Login</h2>
+    <div
+      className="card mx-auto mt-3 p-5 border bg-light"
+      style={{ width: "50%" }}
+    >
+      <Form>
+        <h2>Student Login</h2>
         <FormGroup>
           <Label>Student Id:</Label>
           <Col>
@@ -57,7 +58,7 @@ const UserLogin = (props) => {
             />
           </Col>
         </FormGroup>
-        <FormGroup >
+        <FormGroup>
           <Label>Password</Label>
           <Col>
             <Input
@@ -77,7 +78,7 @@ const UserLogin = (props) => {
             className="mx-4"
             color="success"
             onClick={() => {
-              loginhandle();            
+              loginhandle();
               // props.setShow(true);
             }}
           >
