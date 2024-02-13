@@ -2,10 +2,8 @@ package com.srp.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,21 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.srp.entity.Documents;
 import com.srp.entity.Student;
 import com.srp.exception.ResourceNotFoundException;
-import com.srp.repository.DocumentsRepository;
 import com.srp.service.StudentService;
 
 @RestController
 @RequestMapping("/api/students")
 @CrossOrigin("http://localhost:3000")
 public class StudentController {
-
 	@Autowired
 	private StudentService studentService;
-	@Autowired
-	private DocumentsRepository documentsRepository;
 
 //	@PostMapping
 //	public ResponseEntity<Student> create(@RequestBody Student student){
@@ -57,14 +50,10 @@ public class StudentController {
 	@GetMapping("{id}")
 	public ResponseEntity<Student> getSingleStudent(@PathVariable Long id) {
 		try {
-			return new ResponseEntity<Student>(studentService.getStudentById(id),HttpStatus.OK);
-		}
-		catch(ResourceNotFoundException e){
+			return new ResponseEntity<Student>(studentService.getStudentById(id), HttpStatus.OK);
+		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("Student", "ID", id);
 		}
-//		Student student = studentService.getStudentById(id);
-//		return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-
 	}
 
 	@GetMapping
@@ -105,19 +94,5 @@ public class StudentController {
 		List<Student> allStudents = studentService.getStudentByLocation();
 		return new ResponseEntity<>(allStudents, HttpStatus.OK);
 	}
-	
-	//Document entity controller
-//	@GetMapping("/document/{id}")
-//    public ResponseEntity<byte[]> getPdf(@PathVariable Long id) {
-//        Optional<Documents> optionalPdfDocument = documentsRepository.findById(id);
-//        if (optionalPdfDocument.isPresent()) {
-//            Documents pdfDocument = optionalPdfDocument.get();
-//            return ResponseEntity.ok()
-//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + pdfDocument.getFileName() + "\"")
-//                    .body(pdfDocument.getDocument());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 
 }

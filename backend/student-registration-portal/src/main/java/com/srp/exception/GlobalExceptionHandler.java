@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
@@ -27,20 +27,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 				request.getDescription(false), "STUDENT_NOT_FOUND");
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
-	
-	//customizing Validation error response for entities
+
+	// customizing Validation error response for entities
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		Map<String, String> errors=new HashMap<>();
-		List<ObjectError> errorList=ex.getBindingResult().getAllErrors();
-		
-		errorList.forEach((error)->{
-			String fieldName=((FieldError) error).getField();
-			String message=error.getDefaultMessage();
+		Map<String, String> errors = new HashMap<>();
+		List<ObjectError> errorList = ex.getBindingResult().getAllErrors();
+
+		errorList.forEach((error) -> {
+			String fieldName = ((FieldError) error).getField();
+			String message = error.getDefaultMessage();
 			errors.put(fieldName, message);
 		});
-		return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.srp.entity.Documents;
 
 @Repository
-public interface DocumentsRepository extends JpaRepository<Documents, Long>{
+public interface DocumentsRepository extends JpaRepository<Documents, Long> {
 
 	@Query(nativeQuery = true, value = "SELECT * FROM documents d WHERE d.student_id= :studentId")
 	public List<Documents> findByStudentId(@Param("studentId") Long studentId);

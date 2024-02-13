@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.srp.entity.Student;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long>{
+public interface StudentRepository extends JpaRepository<Student, Long> {
 	public List<Student> findByEmailId(String emailId);
 
 }

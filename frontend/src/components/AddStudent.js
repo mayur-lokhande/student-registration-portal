@@ -85,6 +85,7 @@ export default function AddStudent() {
                   placeholder="Enter your name"
                   name="name"
                   value={name}
+                  required
                   onChange={onInputChange}
                 />
               </div>
@@ -93,11 +94,12 @@ export default function AddStudent() {
                   Email Id
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   placeholder="Enter your email id"
                   name="emailId"
                   value={emailId}
+                  required
                   onChange={onInputChange}
                 />
               </div>
@@ -111,6 +113,7 @@ export default function AddStudent() {
                   placeholder="Enter your mobile number"
                   name="mobileNumber"
                   value={mobileNumber}
+                  required
                   onChange={onInputChange}
                 />
               </div>
@@ -123,6 +126,7 @@ export default function AddStudent() {
                   className="form-control"
                   placeholder="Enter your address"
                   name="address"
+                  required
                   value={address}
                   onChange={onInputChange}
                 />
@@ -137,6 +141,7 @@ export default function AddStudent() {
                   placeholder="Enter your marks"
                   name="marks"
                   value={marks}
+                  required
                   onChange={onInputChange}
                 />
               </div>
@@ -150,6 +155,7 @@ export default function AddStudent() {
                   type="file"
                   className="form-control"
                   name="file"
+                  required
                   multiple
                   onChange={onInputChange}
                 />

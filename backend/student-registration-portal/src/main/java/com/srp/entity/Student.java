@@ -11,8 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 //@Builder
 public class Student {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,17 +38,16 @@ public class Student {
 	private String address;
 	@Column(nullable = false)
 	private Integer marks;
-	
-	//@Column(columnDefinition = "varchar(255) default 'In Progress'")
-	private String status="Pending";
-	private String comment="NA";
-	
+
+	private String status = "Pending";
+	private String comment = "NA";
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "student_id")
 	private List<Documents> documents;
-	
+
 	public Student() {
-		this.documents=new ArrayList<>();
+		this.documents = new ArrayList<>();
 	}
-	
+
 }

@@ -10,8 +10,8 @@ import com.srp.repository.DocumentsRepository;
 import com.srp.service.DocumentsService;
 
 @Service
-public class DocumentsServiceImpl implements DocumentsService{
-	
+public class DocumentsServiceImpl implements DocumentsService {
+
 	@Autowired
 	private DocumentsRepository documentsRepository;
 

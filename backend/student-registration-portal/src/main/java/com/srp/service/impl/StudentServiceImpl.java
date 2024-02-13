@@ -18,11 +18,11 @@ import com.srp.repository.StudentRepository;
 import com.srp.service.StudentService;
 
 @Service
-public class StudentServiceImpl implements StudentService{
-	
+public class StudentServiceImpl implements StudentService {
+
 	@Autowired
 	private StudentRepository studentRepository;
-	
+
 	@Autowired
 	private DocumentsRepository documentsRepository;
 
@@ -36,17 +36,16 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student createStudent(String name, String emailId, Long mobileNumber, String address, Integer marks,
 			List<MultipartFile> files) throws IOException {
-		Student student=new Student();
+		Student student = new Student();
 		student.setName(name);
-		List<Student> studentMail=studentRepository.findByEmailId(emailId);
 		student.setEmailId(emailId);
 		student.setMobileNumber(mobileNumber);
 		student.setAddress(address);
 		student.setMarks(marks);
-		
-		List<Documents> docs=new ArrayList<>();
-		for(MultipartFile file:files) {
-			Documents documents=new Documents();
+
+		List<Documents> docs = new ArrayList<>();
+		for (MultipartFile file : files) {
+			Documents documents = new Documents();
 			documents.setFileName(file.getOriginalFilename());
 			documents.setDocument(file.getBytes());
 			docs.add(documentsRepository.save(documents));
@@ -57,26 +56,26 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public List<Student> getAllStudents() {
-		List<Student> students=studentRepository.findAll();
+		List<Student> students = studentRepository.findAll();
 		return students;
 	}
 
 	@Override
 	public Student getStudentById(Long id) {
-		Optional<Student> student=studentRepository.findById(id);
-		if(student.isPresent()) {
-		return student.get();
-		}
-		else {
+		Optional<Student> student = studentRepository.findById(id);
+		if (student.isPresent()) {
+			return student.get();
+		} else {
 			throw new ResourceNotFoundException("Student", "ID", id);
 		}
-		
+
 	}
 
 	@Override
 	public Student updateStudent(Student student) {
-		Student existingStudent = studentRepository.findById(student.getId()).orElseThrow(()->new ResourceNotFoundException("Student", "ID", student.getId()));
-		
+		Student existingStudent = studentRepository.findById(student.getId())
+				.orElseThrow(() -> new ResourceNotFoundException("Student", "ID", student.getId()));
+
 //		existingStudent.setName(student.getName());
 //		existingStudent.setEmailId(student.getEmailId());
 //		existingStudent.setMobileNumber(student.getMobileNumber());
@@ -84,28 +83,29 @@ public class StudentServiceImpl implements StudentService{
 //		existingStudent.setMarks(student.getMarks());
 		existingStudent.setStatus(student.getStatus());
 		existingStudent.setComment(student.getComment());
-		
-		Student updatedStudent=studentRepository.save(existingStudent);
+
+		Student updatedStudent = studentRepository.save(existingStudent);
 		return updatedStudent;
 	}
 
 	@Override
 	public void delete(Long id) {
-		Student student=studentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Student", "ID", id));
+		studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Student", "ID", id));
 		studentRepository.deleteById(id);
-		
+
 	}
 
 	@Override
 	public List<Student> getStudentByEmailId(String emailId) {
-		
+
 		return studentRepository.findByEmailId(emailId);
 	}
 
 	@Override
 	public List<Student> getStudentByLocation() {
-			List<Student> std= studentRepository.findAll();
-			return std.stream().filter(student->student.getAddress().equalsIgnoreCase("PUNE")).collect(Collectors.toList());
-		}
-
+		List<Student> std = studentRepository.findAll();
+		return std.stream().filter(student -> student.getAddress().equalsIgnoreCase("PUNE"))
+				.collect(Collectors.toList());
 	}
+
+}

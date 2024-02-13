@@ -76,7 +76,7 @@ export default function ViewStudentById() {
                     <b>Faculty Comment: </b>
                     {student.comment}
                   </li> */}
-                  <li>
+                  <Link>
                     {document && (
                       <button
                         className="btn btn-outline-primary my-2"
@@ -85,7 +85,7 @@ export default function ViewStudentById() {
                         View Documents
                       </button>
                     )}
-                  </li>
+                  </Link>
                 </ul>
               </div>
             </div>

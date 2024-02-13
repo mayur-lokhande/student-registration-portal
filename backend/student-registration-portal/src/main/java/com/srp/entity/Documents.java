@@ -1,5 +1,6 @@
 package com.srp.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +21,10 @@ public class Documents {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String fileName;
-	
+
 	@Lob
+	@Column(columnDefinition = "LONGBLOB")
 	private byte[] document;
 }
