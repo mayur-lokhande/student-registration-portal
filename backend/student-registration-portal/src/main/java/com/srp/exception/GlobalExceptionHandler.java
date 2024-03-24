@@ -20,6 +20,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
+			WebRequest request) {
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				request.getDescription(false), "EMAIL_ALREADY_EXISTS");
+		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+	}
+	
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
 			WebRequest request) {
