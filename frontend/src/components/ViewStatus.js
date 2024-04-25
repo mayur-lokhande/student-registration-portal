@@ -26,11 +26,11 @@ export default function ViewStatus() {
     <div>
       <div className="container pt-5">
         <div className="row">
-          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-            <h2 className="text-center m-4 text-white">Student Details</h2>
+          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white">
+            <h2 className="text-center m-4">Student Details</h2>
             <div className="card">
               <div className="card-header">
-                <h4 className="text-info fw-bold">
+                <h4 className="text-primary fw-bold">
                   Student Registration Id: {student.id}
                 </h4>
                 <ul className="list-group list-group-flush">
@@ -65,7 +65,7 @@ export default function ViewStatus() {
                 </ul>
               </div>
             </div>
-            <Link className="btn btn-primary my-2" to={"/"}>
+            <Link className="btn btn-success my-2" to={"/"}>
               Back to Home
             </Link>
           </div>

@@ -1,3 +1,23 @@
-.custom-bg{
-   background-color:  #2f2cf9;
+.custom-bg {
+   background-color: #000743;
+ }
+ 
+ .navbar-toggler-icon {
+   border-color: #fff; /* Change color of the toggler icon */
+ }
+ 
+ .nav-link {
+   color: #fff; /* Color of navbar links */
+ }
+ 
+ .nav-link:hover {
+   color: #ffc107; /* Change color on hover */
+ }
+ 
+ .navbar-brand {
+  color: white;
+  /* Add other styles from App.css for navbar-brand if needed */
+}
+ .navbar-brand:hover {
+  color: #ffc107; /* Change color on hover */
 }

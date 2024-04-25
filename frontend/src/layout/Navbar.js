@@ -2,18 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 export default function Navbar() {
-
-  
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg custom-bg">
         <div className="container-fluid">
-          <Link className="navbar-brand text-white" to="/">
+          <Link className="navbar-brand" to="/">
             Student Registration Portal
           </Link>
           <div>
-            
             <button
               className="navbar-toggler"
               type="button"
@@ -25,10 +21,19 @@ export default function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            {/* <Link className="btn btn-outline-light" to="/addstudent">
-              Register Student
-            </Link> */}
-          
+
+            <Link className="btn btn-outline-info btn-sm mx-2 fw-bold" to="/admin">
+              Admin Login
+            </Link>
+            <Link className="btn btn-outline-info btn-sm mx-2 fw-bold" to="/user">
+              Student Login
+            </Link>
+            <Link
+              className="btn btn-outline-info btn-sm mx-2 fw-bold"
+              to="/addstudent"
+            >
+              Student Registeration
+            </Link>
           </div>
         </div>
       </nav>

@@ -28,19 +28,19 @@ public class Student {
 	private Long id;
 	@Column(nullable = false)
 	private String name;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 //	@NotEmpty(message = "User Email shuld not be null or empty") //validation
 //	@Email(message = "Email address should be valid") //validation
 	private String emailId;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private Long mobileNumber;
 	@Column(nullable = false)
 	private String address;
 	@Column(nullable = false)
 	private Integer marks;
 
-	private String status = "Pending";
-	private String comment = "NA";
+	private String status;
+	private String comment;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "student_id")
