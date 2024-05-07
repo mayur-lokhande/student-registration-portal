@@ -11,4 +11,6 @@ import com.srp.entity.Student;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 	public List<Student> findByEmailId(String emailId);
 
+	public List<Student> findByMobileNumber(Long mobileNumber);
+
 }

@@ -11,16 +11,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-//@NoArgsConstructor
-@AllArgsConstructor
-//@Builder
+@Data
 public class Student {
 
 	@Id
@@ -29,8 +25,8 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false, unique = true)
-//	@NotEmpty(message = "User Email shuld not be null or empty") //validation
-//	@Email(message = "Email address should be valid") //validation
+	@NotEmpty(message = "User Email shuld not be null or empty") // validation
+	@Email(message = "Email address should be valid") //validation
 	private String emailId;
 	@Column(nullable = false, unique = true)
 	private Long mobileNumber;
@@ -38,9 +34,14 @@ public class Student {
 	private String address;
 	@Column(nullable = false)
 	private Integer marks;
-
 	private String status;
 	private String comment;
+
+//	public enum Status{
+//		PENDING
+//	}
+//	private Status status=Status.PENDING;
+//	private String comment="";// Default comment is empty string
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "student_id")

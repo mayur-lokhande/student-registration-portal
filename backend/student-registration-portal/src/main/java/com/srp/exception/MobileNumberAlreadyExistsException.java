@@ -4,17 +4,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.CONFLICT)
-public class EmailAlreadyExistsException extends RuntimeException {
+public class MobileNumberAlreadyExistsException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String fieldName;
+	private Long fieldName;
 
-	public EmailAlreadyExistsException(String fieldName) {
-		super(String.format("%s: This Email Already Exists!",fieldName));
+	public MobileNumberAlreadyExistsException(Long fieldName) {
+		super(String.format("%s: This Mobile Number Already Exists!",fieldName));
 		this.fieldName = fieldName;
 	}
 }

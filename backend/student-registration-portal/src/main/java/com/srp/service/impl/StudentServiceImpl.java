@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.srp.entity.Documents;
 import com.srp.entity.Student;
 import com.srp.exception.EmailAlreadyExistsException;
+import com.srp.exception.MobileNumberAlreadyExistsException;
 import com.srp.exception.ResourceNotFoundException;
 import com.srp.repository.DocumentsRepository;
 import com.srp.repository.StudentRepository;
@@ -54,9 +55,14 @@ public class StudentServiceImpl implements StudentService {
 		student.setDocuments(docs);
 
 		List<Student> std = studentRepository.findByEmailId(student.getEmailId());
+		List<Student> std1=studentRepository.findByMobileNumber(student.getMobileNumber());
 		if (std.size() >= 1) {
 			throw new EmailAlreadyExistsException(student.getEmailId());
-		} else {
+		} 
+		else if(std1.size()>=1) {
+			throw new MobileNumberAlreadyExistsException(student.getMobileNumber());
+		}
+		else {
 			return studentRepository.save(student);
 		}
 	}

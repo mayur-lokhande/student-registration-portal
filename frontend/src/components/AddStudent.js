@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function AddStudent() {
   let navigate = useNavigate();
+  const defaultStatus="Pending";
+  const defaultComment=" ";
 
   const [student, setStudent] = useState({
     name: "",
@@ -11,8 +13,8 @@ export default function AddStudent() {
     mobileNumber: "",
     address: "",
     marks: "",
-    status: "Pending",
-    comment: "NA",
+    status: defaultStatus,
+    comment: defaultComment,
   });
 
   // Add state to hold the selected file
@@ -86,8 +88,8 @@ export default function AddStudent() {
       mobileNumber: "",
       address: "",
       marks: "",
-      status: "Pending",
-      comment: "NA",
+      status: defaultStatus,
+      comment: defaultComment,
     });
     setFile(null);
   };
