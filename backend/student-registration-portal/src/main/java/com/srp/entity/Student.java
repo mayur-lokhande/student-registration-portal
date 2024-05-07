@@ -34,14 +34,18 @@ public class Student {
 	private String address;
 	@Column(nullable = false)
 	private Integer marks;
-	private String status;
-	private String comment;
+	
+	private String status="PENDING";
+	private String comment="NA";
 
 //	public enum Status{
 //		PENDING
 //	}
+//	public enum Comment{
+//		NA
+//	}
 //	private Status status=Status.PENDING;
-//	private String comment="";// Default comment is empty string
+//	private Comment comment=Comment.NA;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "student_id")

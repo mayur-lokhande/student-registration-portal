@@ -20,6 +20,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
+			WebRequest request) {
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+				request.getDescription(false), "STUDENT_NOT_FOUND");
+		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
+
 	@ExceptionHandler(EmailAlreadyExistsException.class)
 	public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
 			WebRequest request) {
@@ -27,13 +35,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 				request.getDescription(false), "EMAIL_ALREADY_EXISTS");
 		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
 	}
-	
-	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
-			WebRequest request) {
+
+	@ExceptionHandler(MobileNumberAlreadyExistsException.class)
+	public ResponseEntity<ErrorDetails> handleMobileNumberAlreadyExistsException(
+			MobileNumberAlreadyExistsException exception, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
-				request.getDescription(false), "STUDENT_NOT_FOUND");
-		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+				request.getDescription(false), "MOBILE_NUMBER_ALREADY_EXISTS");
+		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
 	}
 
 	// customizing Validation error response for entities

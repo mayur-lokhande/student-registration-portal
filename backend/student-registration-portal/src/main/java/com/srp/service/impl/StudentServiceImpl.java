@@ -55,14 +55,12 @@ public class StudentServiceImpl implements StudentService {
 		student.setDocuments(docs);
 
 		List<Student> std = studentRepository.findByEmailId(student.getEmailId());
-		List<Student> std1=studentRepository.findByMobileNumber(student.getMobileNumber());
+		List<Student> std1 = studentRepository.findByMobileNumber(student.getMobileNumber());
 		if (std.size() >= 1) {
 			throw new EmailAlreadyExistsException(student.getEmailId());
-		} 
-		else if(std1.size()>=1) {
+		} else if (std1.size() >= 1) {
 			throw new MobileNumberAlreadyExistsException(student.getMobileNumber());
-		}
-		else {
+		} else {
 			return studentRepository.save(student);
 		}
 	}

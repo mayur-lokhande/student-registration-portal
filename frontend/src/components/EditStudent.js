@@ -43,8 +43,8 @@ export default function EditStudent() {
     <div>
       <div className="container pt-4 pb-4">
         <div className="row">
-          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-            <h2 className="text-center text-white">
+          <div className="col-md-6 offset-md-3 border rounded shadow card mx-auto mt-3 p-5 border bg-light">
+            <h2 className="text-center">
               Respond to student application
             </h2>
             <form onSubmit={onSubmit}>

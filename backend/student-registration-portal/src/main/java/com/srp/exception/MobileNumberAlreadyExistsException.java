@@ -10,11 +10,11 @@ public class MobileNumberAlreadyExistsException extends RuntimeException {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long fieldName;
 
 	public MobileNumberAlreadyExistsException(Long fieldName) {
-		super(String.format("%s: This Mobile Number Already Exists!",fieldName));
+		super(String.format("%s: This Mobile Number Already Exists!", fieldName));
 		this.fieldName = fieldName;
 	}
 }

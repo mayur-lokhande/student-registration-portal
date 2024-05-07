@@ -42,7 +42,7 @@ export default function Home() {
           Logout
         </Link>
         <div className="py-4">
-          <table className="table table-dark">
+          <table className="table table-secondary table-bordered">
             <thead>
               <tr>
                 <th scope="col">Id</th>
@@ -72,19 +72,19 @@ export default function Home() {
                   <td>{student.comment}</td>
                   <td>
                     <Link
-                      className="btn btn-outline-primary mx-2 btn-sm"
+                      className="btn btn-success mx-2 btn-sm"
                       to={`/viewstudentbyid/${student.id}`}
                     >
                       View
                     </Link>
                     <Link
-                      className="btn btn-outline-warning mx-2 btn-sm"
+                      className="btn btn-primary mx-2 btn-sm"
                       to={`/editstudent/${student.id}`}
                     >
                       Respond
                     </Link>
                     <button
-                      className="btn btn-outline-danger mx-2 btn-sm"
+                      className="btn btn-danger mx-2 btn-sm"
                       onClick={() => deleteStudent(student.id)}
                     >
                       Delete
